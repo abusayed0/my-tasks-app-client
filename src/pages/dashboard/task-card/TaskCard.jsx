@@ -8,12 +8,13 @@ import {
 import axios from "axios";
 import PropTypes from 'prop-types';
 import { useState } from "react";
+import { Draggable } from "react-beautiful-dnd";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { FaPencil, FaTrashCan, FaXmark } from "react-icons/fa6";
 import Swal from "sweetalert2";
 
-const TaskCard = ({ taskData, refetch }) => {
+const TaskCard = ({ taskData, refetch, index }) => {
     const { _id, title, description, status, deadline, priority } = taskData;
     const handleDeleteTask = () => {
         console.log(_id);
@@ -73,32 +74,39 @@ const TaskCard = ({ taskData, refetch }) => {
 
     return (
         <>
-            <Card>
-                <CardBody className="relative !p-3 md:!p-6">
-                    <Typography variant="h5" color="blue-gray" className="mb-2 capitalize">
-                        {title}
-                    </Typography>
-                    <Typography variant="small" className="absolute top-3 md:top-6 right-3 md:right-6 border border-[#A93159]  p-1 rounded capitalize">
-                        {priority}
-                    </Typography>
-                    <Typography className="capitalize">
-                        {description}
-                    </Typography>
+            <Draggable draggableId={_id} index={index}>
+                {
+                    (provided) => (
+                        <Card ref={provided.innerRef} {...provided.dragHandleProps} {...provided.draggableProps}>
+                            <CardBody className="relative !p-3 md:!p-6">
+                                <Typography variant="h5" color="blue-gray" className="mb-2 capitalize">
+                                    {title}
+                                </Typography>
+                                <Typography variant="small" className="absolute top-3 md:top-6 right-3 md:right-6 border border-[#A93159]  p-1 rounded capitalize">
+                                    {priority}
+                                </Typography>
+                                <Typography className="capitalize">
+                                    {description}
+                                </Typography>
 
-                    <Typography className="capitalize">
-                        deadline : {deadline}
-                    </Typography>
-                </CardBody>
-                <CardFooter className=" !p-3 !pt-0 md:!p-6">
+                                <Typography className="capitalize">
+                                    deadline : {deadline}
+                                </Typography>
+                            </CardBody>
+                            <CardFooter className=" !p-3 !pt-0 md:!p-6">
 
-                    <button onClick={handleDeleteTask} className=" bg-red-700 p-2 rounded-md">
-                        <FaTrashCan className="text-xl text-white" />
-                    </button>
-                    <button onClick={handleOpen} className="ml-4 bg-[#A93159] p-2 rounded-md">
-                        <FaPencil className="text-xl text-white" />
-                    </button>
-                </CardFooter>
-            </Card>
+                                <button onClick={handleDeleteTask} className=" bg-red-700 p-2 rounded-md">
+                                    <FaTrashCan className="text-xl text-white" />
+                                </button>
+                                <button onClick={handleOpen} className="ml-4 bg-[#A93159] p-2 rounded-md">
+                                    <FaPencil className="text-xl text-white" />
+                                </button>
+                            </CardFooter>
+                        </Card>
+                    )
+                }
+
+            </Draggable>
             <Dialog
                 size="lg"
                 open={open}
@@ -153,6 +161,7 @@ const TaskCard = ({ taskData, refetch }) => {
 };
 TaskCard.propTypes = {
     taskData: PropTypes.object.isRequired,
-    refetch: PropTypes.func.isRequired
+    refetch: PropTypes.func.isRequired,
+    index: PropTypes.number.isRequired
 }
 export default TaskCard;
