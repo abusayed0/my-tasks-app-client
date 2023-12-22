@@ -2,7 +2,7 @@
 import PropTypes from 'prop-types';
 import toDo from '../../../assets/to-do.png';
 import TaskCard from '../task-card/TaskCard';
-const ToDoTasks = ({ allToDo }) => {
+const ToDoTasks = ({ allToDo, refetch }) => {
     console.log(allToDo);
     
     return (
@@ -20,6 +20,7 @@ const ToDoTasks = ({ allToDo }) => {
                             allToDo.map(todo => <TaskCard
                                 key={todo._id}
                                 taskData={todo}
+                                refetch={refetch}
                             />)
                         }
                     </div>
@@ -30,6 +31,7 @@ const ToDoTasks = ({ allToDo }) => {
     );
 };
 ToDoTasks.propTypes = {
-    allToDo: PropTypes.array.isRequired
+    allToDo: PropTypes.array.isRequired,
+    refetch: PropTypes.func.isRequired
 };
 export default ToDoTasks;

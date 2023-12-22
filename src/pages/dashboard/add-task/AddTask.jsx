@@ -21,10 +21,12 @@ const AddTask = ({refetch}) => {
     } = useForm();
 
     const handleOpen = () => setOpen((cur) => !cur);
+    
     const handleCloseModal = () => {
         handleOpen();
         reset();
-    }
+    };
+
     const onSubmit = (data) => {
         const taskInfo = {
             user: user.email,
@@ -35,10 +37,9 @@ const AddTask = ({refetch}) => {
         .then(res => {
             console.log(res.data);
             if(res.data.insertedId){
-                reset();
                 handleCloseModal();
-                toast.success("Tasks added to todos successfully!")
                 refetch();
+                toast.success("Tasks added to todos successfully!");
             }
         })
     };
@@ -53,7 +54,7 @@ const AddTask = ({refetch}) => {
             <Dialog
                 size="lg"
                 open={open}
-                handler={handleOpen}
+                // handler={handleOpen}
                 className="bg-transparent shadow-none"
             >
                 <Card className="w-full overflow-y-auto max-h-[calc(100vh_-_32px)]">

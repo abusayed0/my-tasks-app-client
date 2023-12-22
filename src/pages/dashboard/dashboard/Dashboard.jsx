@@ -24,7 +24,7 @@ const Dashboard = () => {
     return (
         <div className="mt-20">
             <AddTask refetch={refetch}/>
-            <ToDoTasks allToDo={allToDo}/>
+            <ToDoTasks refetch={refetch} allToDo={allToDo}/>
             <OnGoingTasks allOnGoing={allOnGoing}/>
             <CompletedTasks allCompleted={allCompleted}/>
         </div>
