@@ -9,7 +9,7 @@ import CompletedTasks from "../completed-tasks/CompletedTasks";
 
 const Dashboard = () => {
     const {user} = useContext(AuthContext);
-    const {data:tasks=[]} = useQuery({
+    const {data:tasks=[], refetch} = useQuery({
         queryKey: ["tasks", user.email],
         queryFn: async() => {
             const res = await axios.get(`http://localhost:5000/tasks?user=${user.email}`);
@@ -17,12 +17,16 @@ const Dashboard = () => {
         }
     });
     console.log(tasks);
+    const allToDo = tasks.filter(task => task.status === "todo");
+    // 
+    const allOnGoing = tasks.filter(task => task.status === "ongoing");
+    const allCompleted = tasks.filter(task => task.status === "completed");
     return (
         <div className="mt-20">
-            <AddTask/>
-            <ToDoTasks/>
-            <OnGoingTasks/>
-            <CompletedTasks/>
+            <AddTask refetch={refetch}/>
+            <ToDoTasks allToDo={allToDo}/>
+            <OnGoingTasks allOnGoing={allOnGoing}/>
+            <CompletedTasks allCompleted={allCompleted}/>
         </div>
     );
 };

@@ -1,4 +1,5 @@
 import { FaPlus, FaXmark } from "react-icons/fa6";
+import PropTypes from 'prop-types';
 
 import { useForm } from "react-hook-form";
 import {
@@ -10,7 +11,7 @@ import axios from "axios";
 import { AuthContext } from "../../../contexts/auth-provider/AuthProvider";
 import toast from "react-hot-toast";
 
-const AddTask = () => {
+const AddTask = ({refetch}) => {
     const {user} = useContext(AuthContext);
     const [open, setOpen] = useState(false);
     const {
@@ -37,17 +38,18 @@ const AddTask = () => {
                 reset();
                 handleCloseModal();
                 toast.success("Tasks added to todos successfully!")
+                refetch();
             }
         })
     };
 
     return (
         <div>
-            <div onClick={handleOpen} className="flex gap-3 items-center hover:text-[#A93159] cursor-pointer max-w-max">
+            <div onClick={handleOpen} className="flex gap-2 items-center hover:text-[#A93159] cursor-pointer max-w-max">
                 <h3  className="font-medium text-3xl">Add a new task</h3>
                 <FaPlus className="text-2xl"/>
             </div>
-            <hr className="border border-black"/>
+            <hr className="mt-1 border border-black"/>
             <Dialog
                 size="lg"
                 open={open}
@@ -93,5 +95,7 @@ const AddTask = () => {
         </div>
     );
 };
-
+AddTask.propTypes = {
+    refetch: PropTypes.func.isRequired
+};
 export default AddTask;
