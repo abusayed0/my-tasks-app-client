@@ -1,12 +1,28 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import googleImg from "../../../assets/google.png"
+import { useContext } from "react";
+import { AuthContext } from "../../../contexts/auth-provider/AuthProvider";
 const Login = () => {
+    const navigate = useNavigate();
+    const {emailPassLogin} = useContext(AuthContext);
     const handleLogin = e => {
         e.preventDefault();
         const form = e.target;
         const email = form.email.value;
         const password = form.password.value;
         console.log(email, password);
+
+        // login user 
+        emailPassLogin(email, password)
+        .then(userCredential => {
+            const loggedUser = userCredential.user;
+            navigate("/");
+            console.log(loggedUser, "logged user");
+        })
+        .catch(err => {
+            const errMessage = err.message;
+            console.error(errMessage);
+        })
     };
     return (
         <div className="mt-20 w-full max-w-2xl mx-auto border">

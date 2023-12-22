@@ -1,7 +1,7 @@
 import { Typography } from "@material-tailwind/react";
 const Footer = () => {
     return (
-        <footer className="w-full bg-white p-8">
+        <footer className="mt-20 w-full bg-white p-8">
             <div className="flex flex-row flex-wrap items-center justify-center gap-y-6 gap-x-12 bg-white text-center md:justify-between">
             <Typography variant="h5" >
             My Tasks
