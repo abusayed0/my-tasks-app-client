@@ -72,7 +72,7 @@ const TaskCard = ({ taskData, refetch }) => {
 
 
     return (
-        <div>
+        <>
             <Card>
                 <CardBody className="relative !p-3 md:!p-6">
                     <Typography variant="h5" color="blue-gray" className="mb-2 capitalize">
@@ -148,7 +148,7 @@ const TaskCard = ({ taskData, refetch }) => {
 
                 </Card>
             </Dialog>
-        </div>
+        </>
     );
 };
 TaskCard.propTypes = {

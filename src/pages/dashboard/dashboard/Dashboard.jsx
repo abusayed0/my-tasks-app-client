@@ -6,6 +6,7 @@ import axios from "axios";
 import ToDoTasks from "../to-do-tasks/ToDoTasks";
 import OnGoingTasks from "../on-going-tasks/OnGoingTasks";
 import CompletedTasks from "../completed-tasks/CompletedTasks";
+import ProflieCard from "../proflie-card/ProflieCard";
 
 const Dashboard = () => {
     const {user} = useContext(AuthContext);
@@ -23,10 +24,11 @@ const Dashboard = () => {
     const allCompleted = tasks.filter(task => task.status === "completed");
     return (
         <div className="mt-20">
+            <ProflieCard/>
             <AddTask refetch={refetch}/>
             <ToDoTasks refetch={refetch} allToDo={allToDo}/>
-            <OnGoingTasks allOnGoing={allOnGoing}/>
-            <CompletedTasks allCompleted={allCompleted}/>
+            <OnGoingTasks refetch={refetch} allOnGoing={allOnGoing}/>
+            <CompletedTasks refetch={refetch} allCompleted={allCompleted}/>
         </div>
     );
 };

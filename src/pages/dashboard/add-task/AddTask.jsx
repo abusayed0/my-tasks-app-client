@@ -46,7 +46,7 @@ const AddTask = ({refetch}) => {
 
     return (
         <div>
-            <div onClick={handleOpen} className="flex gap-2 items-center hover:text-[#A93159] cursor-pointer max-w-max">
+            <div onClick={handleOpen} className="mt-20 flex gap-2 items-center hover:text-[#A93159] cursor-pointer max-w-max">
                 <h3  className="font-medium text-3xl">Add a new task</h3>
                 <FaPlus className="text-2xl"/>
             </div>

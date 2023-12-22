@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import target from '../../../assets/target.png';
 import TaskCard from '../task-card/TaskCard';
 
-const CompletedTasks = ({ allCompleted }) => {
+const CompletedTasks = ({ allCompleted, refetch }) => {
     console.log(allCompleted);
     return (
         <div className="mt-20">
@@ -20,6 +20,7 @@ const CompletedTasks = ({ allCompleted }) => {
                             allCompleted.map(todo => <TaskCard
                                 key={todo._id}
                                 taskData={todo}
+                                refetch={refetch}
                             />)
                         }
                     </div>
@@ -30,6 +31,7 @@ const CompletedTasks = ({ allCompleted }) => {
     );
 };
 CompletedTasks.propTypes = {
-    allCompleted: PropTypes.array.isRequired
+    allCompleted: PropTypes.array.isRequired,
+    refetch: PropTypes.func.isRequired
 };
 export default CompletedTasks;

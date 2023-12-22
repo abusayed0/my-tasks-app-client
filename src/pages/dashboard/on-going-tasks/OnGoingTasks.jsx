@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import rotate from '../../../assets/rotate.png';
 import TaskCard from '../task-card/TaskCard';
 
-const OnGoingTasks = ({ allOnGoing }) => {
+const OnGoingTasks = ({ allOnGoing, refetch}) => {
     console.log(allOnGoing);
     return (
         <div className="mt-20">
@@ -20,6 +20,7 @@ const OnGoingTasks = ({ allOnGoing }) => {
                             allOnGoing.map(todo => <TaskCard
                                 key={todo._id}
                                 taskData={todo}
+                                refetch={refetch}
                             />)
                         }
                     </div>
@@ -30,6 +31,7 @@ const OnGoingTasks = ({ allOnGoing }) => {
     );
 };
 OnGoingTasks.propTypes = {
-    allOnGoing: PropTypes.array.isRequired
+    allOnGoing: PropTypes.array.isRequired,
+    refetch: PropTypes.func.isRequired
 };
 export default OnGoingTasks;

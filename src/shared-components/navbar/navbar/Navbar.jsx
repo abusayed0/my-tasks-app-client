@@ -72,6 +72,16 @@ const Navbar = () => {
       color="blue-gray"
       className="p-1 font-medium"
     >
+      <NavLink to="/performance" className="flex items-center hover:text-[#A93159] transition-colors">
+        Performance
+      </NavLink>
+    </Typography>
+    <Typography
+      as="li"
+      variant="paragraph"
+      color="blue-gray"
+      className="p-1 font-medium"
+    >
       {
         user ?
           <Menu>

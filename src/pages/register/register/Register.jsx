@@ -82,7 +82,7 @@ const Register = () => {
 
     };
     return (
-        <div className="mt-20 w-full max-w-2xl mx-auto border">
+        <div className="mt-20 w-full max-w-2xl mx-auto">
             <h3 className="text-4xl font-bold">Please Register</h3>
             <form onSubmit={handleRegister} className="mt-7">
                 <div>
