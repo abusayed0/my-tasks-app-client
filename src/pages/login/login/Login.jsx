@@ -1,7 +1,8 @@
 import { Link, useNavigate } from "react-router-dom";
-import googleImg from "../../../assets/google.png"
 import { useContext } from "react";
 import { AuthContext } from "../../../contexts/auth-provider/AuthProvider";
+import toast from "react-hot-toast";
+import GoogleLogin from "../../../shared-components/social-login/googleLogin/GoogleLogin";
 const Login = () => {
     const navigate = useNavigate();
     const {emailPassLogin} = useContext(AuthContext);
@@ -16,11 +17,13 @@ const Login = () => {
         emailPassLogin(email, password)
         .then(userCredential => {
             const loggedUser = userCredential.user;
+            toast.success("Login successfully !")
             navigate("/");
             console.log(loggedUser, "logged user");
         })
         .catch(err => {
             const errMessage = err.message;
+            toast.error(errMessage);
             console.error(errMessage);
         })
     };
@@ -41,9 +44,7 @@ const Login = () => {
             </form>
             <p className="mt-11 text-center">or continue with</p>
             <div className="mt-4 text-center">
-                <button className="border px-12 py-3 border-[#BCBEC0] rounded-3xl">
-                    <img src={googleImg} alt="" />
-                </button>
+               <GoogleLogin/>
             </div>
             <p className="mt-8 text-center">Don&apos;t have an account yet? <Link to="/register" className="font-medium">Resiger</Link></p>
         </div>

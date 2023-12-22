@@ -2,14 +2,20 @@
 import { RouterProvider } from 'react-router-dom'
 import './App.css'
 import routes from './router/routes'
+import { Toaster } from 'react-hot-toast'
 
 function App() {
-  
+
 
   return (
-    <RouterProvider router={routes}>
-
-    </RouterProvider>
+    <div>
+      <RouterProvider router={routes}>
+      </RouterProvider>
+      <Toaster
+        position="top-right"
+        reverseOrder={false}
+      />
+    </div>
   )
 }
 
