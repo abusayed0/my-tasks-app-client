@@ -2,17 +2,19 @@ import { useContext } from "react";
 import googleImg from "../../../assets/google.png"
 import { AuthContext } from "../../../contexts/auth-provider/AuthProvider";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const GoogleLogin = () => {
     const {googleLogin} = useContext(AuthContext);
+    const location = useLocation();
+    const from = location.state?.from || "/";
     const navigate = useNavigate();
     const handleGoogleLogin = () => {
         googleLogin()
         .then(result => {
             const loggedUser = result.user;
             toast.success("Login successfully !");
-            navigate("/");
+            navigate(from, {replace: true});
             console.log("logged user", loggedUser);
         })
         .catch(err => {

@@ -13,15 +13,18 @@ import {
   MenuItem,
   Avatar,
 } from "@material-tailwind/react";
- 
-import { NavLink } from "react-router-dom";
+
+import { NavLink, useNavigate } from "react-router-dom";
 import "./Navbar.css"
 import { AuthContext } from "../../../contexts/auth-provider/AuthProvider";
 const Navbar = () => {
   const [openNav, setOpenNav] = useState(false);
-  const { user, logOut} = useContext(AuthContext);
-  const handleWindowResize = () =>
-    window.innerWidth >= 960 && setOpenNav(false);
+  const { user, logOut } = useContext(AuthContext);
+  const navigate = useNavigate();
+  
+  const handleWindowResize = () => {
+    window.innerWidth >= 768 && setOpenNav(false);
+  };
 
   useEffect(() => {
     window.addEventListener("resize", handleWindowResize);
@@ -30,17 +33,19 @@ const Navbar = () => {
       window.removeEventListener("resize", handleWindowResize);
     };
   }, []);
+
   const handleLogOut = () => {
     logOut()
-    .then(() => {
-      console.log("Log out successfully");
-    })
-    .catch(err => {
-      const errMessage = err.message;
-      console.error(errMessage);
-    })
+      .then(() => {
+        console.log("Log out successfully");
+        navigate("/");
+      })
+      .catch(err => {
+        const errMessage = err.message;
+        console.error(errMessage);
+      })
   };
-  const navList = <ul className="my-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
+  const navList = <ul className="my-2 flex flex-col gap-2 md:mb-0 md:mt-0 md:flex-row md:items-center md:gap-6">
     <Typography
       as="li"
       variant="paragraph"
@@ -74,8 +79,9 @@ const Navbar = () => {
               <Avatar
                 variant="circular"
                 alt="user"
-                className="cursor-pointer"
+                className="cursor-pointer !size-7"
                 src={user.photoURL}
+    
               />
             </MenuHandler>
             <MenuList>
@@ -109,9 +115,9 @@ const Navbar = () => {
 
   </ul>
 
-  
+
   return (
-    <Navigation className="sticky top-0 z-10 h-max max-w-full rounded-none px-6 py-3">
+    <Navigation className="sticky top-0 z-10 h-max max-w-full rounded-none px-2 md:px-6 py-3 bg-[#D0E7D2]">
       <div className="flex items-center justify-between text-blue-gray-900">
         <Typography
           variant="h5"
@@ -119,12 +125,12 @@ const Navbar = () => {
         >
           My Tasks
         </Typography>
-        <div className="hidden lg:block">
+        <div className="hidden md:block">
           {navList}
         </div>
         <IconButton
           variant="text"
-          className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
+          className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent md:hidden"
           ripple={false}
           onClick={() => setOpenNav(!openNav)}
         >

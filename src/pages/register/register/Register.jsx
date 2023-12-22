@@ -107,7 +107,7 @@ const Register = () => {
             <div className="mt-4 text-center">
                 <GoogleLogin/>
             </div>
-            <p className="mt-8 text-center">Already have an account yet? <Link to="/login" className="font-medium">Login</Link></p>
+            <p className="mt-8 text-center">Already have an account yet? <Link to="/login" className="font-medium underline decoration-[#A93159]">Login</Link></p>
         </div>
     );
 };

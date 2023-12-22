@@ -5,9 +5,12 @@ import Navbar from "../../shared-components/navbar/navbar/Navbar";
 const Main = () => {
     return (
         <div>
-            <Navbar/>
-            <Outlet/>
-            <Footer/>
+            <Navbar />
+            <div className="max-w-[1320px] mx-auto px-2 md:px-6">
+
+                <Outlet />
+            </div>
+            <Footer />
         </div>
     );
 };

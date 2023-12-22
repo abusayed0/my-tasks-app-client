@@ -1,10 +1,13 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../../contexts/auth-provider/AuthProvider";
 import toast from "react-hot-toast";
 import GoogleLogin from "../../../shared-components/social-login/googleLogin/GoogleLogin";
 const Login = () => {
     const navigate = useNavigate();
+    const location = useLocation();
+    console.log(location);
+    const from = location?.state?.from || "/";
     const {emailPassLogin} = useContext(AuthContext);
     const handleLogin = e => {
         e.preventDefault();
@@ -18,7 +21,7 @@ const Login = () => {
         .then(userCredential => {
             const loggedUser = userCredential.user;
             toast.success("Login successfully !")
-            navigate("/");
+            navigate(from, {replace: true});
             console.log(loggedUser, "logged user");
         })
         .catch(err => {
@@ -46,7 +49,7 @@ const Login = () => {
             <div className="mt-4 text-center">
                <GoogleLogin/>
             </div>
-            <p className="mt-8 text-center">Don&apos;t have an account yet? <Link to="/register" className="font-medium">Resiger</Link></p>
+            <p className="mt-8 text-center">Don&apos;t have an account yet? <Link to="/register" className="font-medium underline decoration-[#A93159]">Resiger</Link></p>
         </div>
     );
 };
